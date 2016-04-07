@@ -30,6 +30,7 @@ def main():
     up = down = left = right = idle = False
     while not done:
         for event in pygame.event.get():
+            idle = False
             if event.type == pygame.QUIT:
                 done = True
             elif event.type == KEYDOWN:
@@ -37,19 +38,29 @@ def main():
                     right = True
                 elif event.key == K_LEFT:
                     left = True
-                else:
+                elif event.key == K_UP:
+                    up = True
+
+            elif event.type == KEYUP:
+                if event.key == K_RIGHT:
+                    right = False
+                    idle = True
+                elif event.key == K_LEFT:
+                    left = False
+                    idle = True
+                elif event.key == K_UP:
+                    up = False
                     idle = True
 
-        active_sprite_list.update(left, right, up, down, idle)
+            # else:
+            #     idle = True
 
+        active_sprite_list.update(left, right, up, down, idle)
         ###current_level.update()
 
         current_level.draw(screen)
         active_sprite_list.draw(screen)
 
-
-
-        #pygame.display.flip()
 
         clock.tick(20)
 

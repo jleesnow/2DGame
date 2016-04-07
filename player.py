@@ -10,16 +10,11 @@ class Player(pygame.sprite.Sprite):
         self.change_x = 0
         self.change_y = 0
 
-        # self.idle = [pygame.image.load('assets/Cowboy/Cowboy6_idle with gun_0.png'),
-        #              pygame.image.load('assets/Cowboy/Cowboy6_idle with gun_1.png'),
-        #              pygame.image.load('assets/Cowboy/Cowboy6_idle with gun_2.png'),
-        #              pygame.image.load('assets/Cowboy/Cowboy6_idle with gun_3.png')]
 
         self.idle = ["assets/Cowboy/Cowboy6_idle with gun_0.png",
                      "assets/Cowboy/Cowboy6_idle with gun_1.png",
                      "assets/Cowboy/Cowboy6_idle with gun_2.png",
                      "assets/Cowboy/Cowboy6_idle with gun_3.png"]
-
 
         self.right_walk = ["assets/Cowboy/Cowboy6_walking with gun_0.png",
                            "assets/Cowboy/Cowboy6_walking with gun_1.png",
@@ -27,6 +22,7 @@ class Player(pygame.sprite.Sprite):
                            "assets/Cowboy/Cowboy6_walking with gun_3.png"]
 
         self.left_walk = []
+
 
         self.direction = "R"
 
@@ -44,16 +40,27 @@ class Player(pygame.sprite.Sprite):
             self.frame += 1
             self.image = pygame.image.load(self.left_walk[self.frame])
             if self.frame == 3: self.frame = 0
+            self.rect.left -= 10
 
         if right:
             self.frame += 1
             self.image = pygame.image.load(self.right_walk[self.frame])
             if self.frame == 3: self.frame = 0
+            self.rect.right += 10
 
         if idle:
             self.frame += 1
             self.image = pygame.image.load(self.idle[self.frame])
             if self.frame == 3: self.frame = 0
 
-    def draw(self, screen):
-        screen.blit(self.image, self.rect)
+        if up:
+            # self.rect.top += -10
+            # self.frame += 1
+            # self.image = pygame.image.load(self.right_walk[self.frame])
+            # if self.frame == 3: self.frame = 0
+            # self.rect.top += 10
+
+
+
+    # def draw(self, screen):
+    #     screen.blit(self.image, self.rect)
