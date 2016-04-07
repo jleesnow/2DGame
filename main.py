@@ -41,15 +41,17 @@ def main():
                     idle = True
 
         active_sprite_list.update(left, right, up, down, idle)
-        #player.update(left, right, up, down, idle)
+
         ###current_level.update()
 
         current_level.draw(screen)
         active_sprite_list.draw(screen)
 
+
+
         #pygame.display.flip()
 
-        clock.tick(30)
+        clock.tick(20)
 
         pygame.display.flip()
 
@@ -61,5 +63,5 @@ if __name__ == '__main__':
     try:
         main()
     finally:
-                pygame.quit()
+        pygame.quit()
 
