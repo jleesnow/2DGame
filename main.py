@@ -49,9 +49,6 @@ def main():
                 elif event.key == K_LEFT:
                     left = False
                     idle = True
-                # elif event.key == K_UP:
-                #     up = False
-                #     idle = True
 
             # else:
             #     idle = True

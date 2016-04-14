@@ -23,12 +23,12 @@ class Player(pygame.sprite.Sprite):
                            "assets/Cowboy/Cowboy6_walking with gun_2.png",
                            "assets/Cowboy/Cowboy6_walking with gun_3.png"]
 
-        self.left_walk = ["assets/Cowboy/Cowboy6_walking left_0.png",
-                           "assets/Cowboy/Cowboy6_walking left_1.png",
-                           "assets/Cowboy/Cowboy6_walking left_2.png",
-                           "assets/Cowboy/Cowboy6_walking left_3.png"]
 
 
+        self.left_walk = [pygame.transform.flip(pygame.image.load(self.right_walk[0]).convert(), True, False),
+                          pygame.transform.flip(pygame.image.load(self.right_walk[1]).convert(), True, False),
+                          pygame.transform.flip(pygame.image.load(self.right_walk[2]).convert(), True, False),
+                          pygame.transform.flip(pygame.image.load(self.right_walk[3]).convert(), True, False)]
 
 
 
@@ -47,7 +47,9 @@ class Player(pygame.sprite.Sprite):
         self.jumpUpdate()
         if left:
             self.frame += 1
-            self.image = pygame.image.load(self.left_walk[self.frame])
+            self.image = self.left_walk[self.frame]
+            colorkey = self.image.get_at((0, 0))
+            self.image.set_colorkey(colorkey)
             if self.frame == 3: self.frame = 0
             self.rect.left -= 10
 
