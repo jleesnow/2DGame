@@ -39,7 +39,8 @@ def main():
                 elif event.key == K_LEFT:
                     left = True
                 elif event.key == K_UP:
-                    up = True
+                    # up = True
+                    player.jump()
 
             elif event.type == KEYUP:
                 if event.key == K_RIGHT:
@@ -48,9 +49,9 @@ def main():
                 elif event.key == K_LEFT:
                     left = False
                     idle = True
-                elif event.key == K_UP:
-                    up = False
-                    idle = True
+                # elif event.key == K_UP:
+                #     up = False
+                #     idle = True
 
             # else:
             #     idle = True

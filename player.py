@@ -7,8 +7,10 @@ class Player(pygame.sprite.Sprite):
         # pygame.sprite.Sprite.__init__(self)
         super().__init__()
 
-        self.change_x = 0
-        self.change_y = 0
+        self.jumping = False
+
+        self.yvel = 0
+        self.grav = 1
 
 
         self.idle = ["assets/Cowboy/Cowboy6_idle with gun_0.png",
@@ -21,7 +23,13 @@ class Player(pygame.sprite.Sprite):
                            "assets/Cowboy/Cowboy6_walking with gun_2.png",
                            "assets/Cowboy/Cowboy6_walking with gun_3.png"]
 
-        self.left_walk = []
+        self.left_walk = ["assets/Cowboy/Cowboy6_walking left_0.png",
+                           "assets/Cowboy/Cowboy6_walking left_1.png",
+                           "assets/Cowboy/Cowboy6_walking left_2.png",
+                           "assets/Cowboy/Cowboy6_walking left_3.png"]
+
+
+
 
 
         self.direction = "R"
@@ -36,6 +44,7 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
     def update(self, left, right, up, down, idle):
+        self.jumpUpdate()
         if left:
             self.frame += 1
             self.image = pygame.image.load(self.left_walk[self.frame])
@@ -53,14 +62,18 @@ class Player(pygame.sprite.Sprite):
             self.image = pygame.image.load(self.idle[self.frame])
             if self.frame == 3: self.frame = 0
 
-        if up:
-            # self.rect.top += -10
-            # self.frame += 1
-            # self.image = pygame.image.load(self.right_walk[self.frame])
-            # if self.frame == 3: self.frame = 0
-            # self.rect.top += 10
 
+    def jump(self):
+        if self.jumping == False:
+            self.yvel = -12
+            self.jumping = True
 
+    def jumpUpdate(self):
+        if self.jumping:
+            self.yvel += self.grav
+            self.rect.y += self.yvel
+            if self.rect.y > (399 - self.rect.height - 100):
+                self.jumping = False
 
     # def draw(self, screen):
     #     screen.blit(self.image, self.rect)
