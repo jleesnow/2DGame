@@ -22,7 +22,7 @@ def main():
     player.level = current_level
 
     player.rect.x = 10
-    player.rect.y = 399 - player.rect.height - 100
+    player.rect.y = 300 - player.rect.height
     active_sprite_list.add(player)
 
 
@@ -49,12 +49,23 @@ def main():
                 elif event.key == K_LEFT:
                     left = False
                     idle = True
-
-            # else:
-            #     idle = True
+                else:
+                    idle = True
 
         active_sprite_list.update(left, right, up, down, idle)
         ###current_level.update()
+
+        # ##################
+        # if player.rect.right >= 500:
+        #     diff = player.rect.right - 500
+        #     player.rect.right = 500
+        #     current_level.shift(-diff)
+        #
+        # if player.rect.right <= 120:
+        #     diff = 120 - player.rect.left
+        #     player.rect.left = 120
+        #     current_level.shift(diff)
+        # ##################
 
         current_level.draw(screen)
         active_sprite_list.draw(screen)

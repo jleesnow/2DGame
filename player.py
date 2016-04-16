@@ -74,7 +74,7 @@ class Player(pygame.sprite.Sprite):
         if self.jumping:
             self.yvel += self.grav
             self.rect.y += self.yvel
-            if self.rect.y > (399 - self.rect.height - 100):
+            if self.rect.y > (299 - self.rect.height):
                 self.jumping = False
 
     # def draw(self, screen):
