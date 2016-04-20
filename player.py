@@ -18,6 +18,11 @@ class Player(pygame.sprite.Sprite):
                      "assets/Cowboy/Cowboy6_idle with gun_2.png",
                      "assets/Cowboy/Cowboy6_idle with gun_3.png"]
 
+        self.idle_left = [pygame.transform.flip(pygame.image.load(self.idle[0]).convert(), True, False),
+                          pygame.transform.flip(pygame.image.load(self.idle[1]).convert(), True, False),
+                          pygame.transform.flip(pygame.image.load(self.idle[2]).convert(), True, False),
+                          pygame.transform.flip(pygame.image.load(self.idle[3]).convert(), True, False)]
+
         self.right_walk = ["assets/Cowboy/Cowboy6_walking with gun_0.png",
                            "assets/Cowboy/Cowboy6_walking with gun_1.png",
                            "assets/Cowboy/Cowboy6_walking with gun_2.png",
@@ -34,7 +39,7 @@ class Player(pygame.sprite.Sprite):
 
         self.direction = "R"
 
-        self.level = None
+        self.level = None ####
         self.frame = 0
 
         self.image = pygame.image.load('assets/Cowboy/Cowboy6_idle with gun_0.png').convert()
@@ -52,20 +57,31 @@ class Player(pygame.sprite.Sprite):
             self.image.set_colorkey(colorkey)
             if self.frame == 3: self.frame = 0
             self.rect.left -= 10
+            self.direction = "L"
 
         if right:
             self.frame += 1
             self.image = pygame.image.load(self.right_walk[self.frame])
             if self.frame == 3: self.frame = 0
             self.rect.right += 10
+            self.direction = "R"
 
         if idle:
-            self.frame += 1
-            self.image = pygame.image.load(self.idle[self.frame])
-            if self.frame == 3: self.frame = 0
+            if self.direction == "R":
+                self.frame += 1
+                self.image = pygame.image.load(self.idle[self.frame])
+                if self.frame == 3: self.frame = 0
+            if self.direction == "L":
+                self.frame += 1
+                self.image = self.idle_left[self.frame]
+                colorkey = self.image.get_at((0, 0))
+                self.image.set_colorkey(colorkey)
+                if self.frame == 3: self.frame = 0
 
 
     def jump(self):
+        jumpsound = pygame.mixer.Sound('assets/sounds/jump.wav')
+        jumpsound.play()
         if self.jumping == False:
             self.yvel = -12
             self.jumping = True
@@ -76,6 +92,3 @@ class Player(pygame.sprite.Sprite):
             self.rect.y += self.yvel
             if self.rect.y > (299 - self.rect.height):
                 self.jumping = False
-
-    # def draw(self, screen):
-    #     screen.blit(self.image, self.rect)
