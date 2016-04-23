@@ -4,17 +4,21 @@ import textrect
 import level
 from player import Player
 from bullets import Bullet
+from horse import Horse
 
 def main():
     pygame.init()
-    global screen, clock, current_level_no, current_level
+    global screen, clock, current_level_no, current_level, rescued
     screen = pygame.display.set_mode([768, 399])
     pygame.mouse.set_visible(False)
     clock = pygame.time.Clock()
 
+    rescued = False
+
     title_screen()
 
     player = Player()
+    horse = Horse()
 
     levelList = []
     levelList.append(level.Level1(player))
@@ -32,6 +36,10 @@ def main():
     player.rect.x = 60
     player.rect.y = 300 - player.rect.height
     active_sprite_list.add(player)
+
+    # horse.rect.x = 60
+    # horse.rect.y = 250
+    # active_sprite_list.add(horse)
 
     done = False
     up = down = left = right = idle = False
@@ -81,10 +89,18 @@ def main():
 
         current_level.update()
 
+        if current_level_no == 1 and rescued == False:
+            horse.rect.x = 150
+            horse.rect.y = 263
+            active_sprite_list.add(horse)
+            rescued = True
+
         ##################
         if player.rect.right >= 500 and current_level.totalShift < current_level.level_limit:
             diff = player.rect.right - 500
+            diff1 = horse.rect.right - 500
             player.rect.right = 500
+            horse.rect.right = 455
             current_level.shift(-diff)
 
         # this offsets at the beginning

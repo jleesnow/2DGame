@@ -1,6 +1,7 @@
 import pygame
 from pygame import *
 from enemies import Enemy
+from horse import Horse
 
 class Level():
     def __init__(self, player):
