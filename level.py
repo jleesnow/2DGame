@@ -19,16 +19,33 @@ class Level():
     def update(self):
         self.enemies.update()
 
-    def draw(self, screen):
+    def draw(self, screen, current_level_no):
         self.background_size = self.background.get_size()
         self.background_rect = self.background.get_rect()
         w,h = self.background_size
         colorkey = self.background.get_at((0, 0))
         self.background.set_colorkey(colorkey)
+        self.portal = pygame.image.load("assets/portal.png").convert()
+        colorkey = self.portal.get_at((0, 0))
+        self.portal.set_colorkey(colorkey)
+        i = 700
+
 
 
         screen.blit(self.sky, (0,0))
         screen.blit(self.background, (self.shifted // 3,0))
+
+        screen.blit(self.portal, (self.shifted // 3, 160))
+        if self.totalShift >= 4500:
+            i-=5
+            screen.blit(self.portal, (i, 160))
+
+        # if current_level_no is 0:
+        #     screen.blit(self.portal, (self.shifted // 3, 160))
+        # elif current_level_no is 1:
+        #     if self.totalShift >= 4500:
+        #         i-=5
+        #         screen.blit(self.portal, (i, 160))
 
         self.enemies.draw(screen)
 
@@ -54,29 +71,12 @@ class Level1(Level):
         self.background = pygame.image.load("assets/background1new.png").convert()
         self.level_limit = 4550
 
-        # enemy1 = Enemy()
-        # self.enemies.add(enemy1)
-        #
-        # enemy1.rect.x = 700
-        # enemy1.rect.y = 307 - enemy1.rect.height
-        #
-        # enemy2 = Enemy()
-        # self.enemies.add(enemy2)
-        #
-        # enemy2.rect.x = 1200
-        # enemy2.rect.y = 307 - enemy2.rect.height
-        #
-        # enemy3 = Enemy()
-        # self.enemies.add(enemy3)
-        #
-        # enemy3.rect.x = 1500
-        # enemy3.rect.y = 307 - enemy3.rect.height
-        #
-        # enemy4 = Enemy()
-        # self.enemies.add(enemy4)
-        #
-        # enemy4.rect.x = 2000
-        # enemy4.rect.y = 307 - enemy4.rect.height
+        self.portal = pygame.image.load("assets/portal.png").convert()
+        self.portal_rect = self.portal.get_rect()
+
+        self.portal_rect.x = 1000
+        self.portal_rect.y = 160
+
         enemy_space = 0
 
         enemy1 = Enemy()

@@ -4,7 +4,8 @@ import pygame
 class Bullet(pygame.sprite.Sprite):
 
     def __init__(self, direction):
-        super().__init__()
+        #super().__init__()
+        pygame.sprite.Sprite.__init__(self)
 
         gunshot = pygame.mixer.Sound('assets/sounds/gun.wav')
         gunshot.play()
