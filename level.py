@@ -40,12 +40,6 @@ class Level():
             i-=5
             screen.blit(self.portal, (i, 160))
 
-        # if current_level_no is 0:
-        #     screen.blit(self.portal, (self.shifted // 3, 160))
-        # elif current_level_no is 1:
-        #     if self.totalShift >= 4500:
-        #         i-=5
-        #         screen.blit(self.portal, (i, 160))
 
         self.enemies.draw(screen)
 
@@ -108,3 +102,25 @@ class Level2(Level):
         self.sky = pygame.image.load("assets/sky.png").convert()
         self.background = pygame.image.load("assets/background2new.png").convert()
         self.level_limit = 4550
+
+        enemy_space = 0
+
+        enemy1 = Enemy()
+        self.enemies.add(enemy1)
+        enemy2 = Enemy()
+        self.enemies.add(enemy2)
+        enemy3 = Enemy()
+        self.enemies.add(enemy3)
+        enemy4 = Enemy()
+        self.enemies.add(enemy4)
+        enemy5 = Enemy()
+        self.enemies.add(enemy5)
+        enemy6 = Enemy()
+        self.enemies.add(enemy6)
+        enemy7 = Enemy()
+        self.enemies.add(enemy7)
+
+        for enemy in self.enemies:
+            enemy_space += 700
+            enemy.rect.x = enemy_space
+            enemy.rect.y = 307 - enemy.rect.height

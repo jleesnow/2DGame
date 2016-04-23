@@ -96,8 +96,12 @@ def main():
 
         if player.rect.x >= 720:
             pygame.time.wait(1000)
-            right = False
-            end_of_level_screen(player, levelList)
+            if current_level_no == 0:
+                right = False
+                end_of_level_screen(player, levelList)
+            if current_level_no == 1:
+                right = False
+                end_of_game_screen(player, levelList)
 
         for bullet in bullet_list:
             dino_hit_list = pygame.sprite.spritecollide(bullet, current_level.enemies, False)
@@ -183,6 +187,26 @@ def end_of_level_screen(player, levelList):
         player.rect.y = 300 - player.rect.height
         pygame.display.update()
         clock.tick(20)
+
+def end_of_game_screen(player, levelList):
+    customfont = "C:/Users/Jay/Desktop/Programming Assignments/321/2DFinal - Copy/assets/custom.ttf"
+    font = pygame.font.Font(customfont, 36)
+    title_string = "Cowboy Dan has saved his horse and made it back to present day! Good job! \n\nThank you for playing! \n\nPress Enter to exit"
+    screen_rect = screen.get_rect()
+    title = textrect.render_textrect(title_string, font, screen_rect, (255,255,255), 0)
+
+    done = False
+    while not done:
+        screen.blit(title, (0,0))
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                done = True
+            elif event.type == KEYDOWN and event.key == K_KP_ENTER:
+                done = True
+        pygame.display.update()
+        clock.tick(20)
+    pygame.quit()
 
 
 if __name__ == '__main__':
