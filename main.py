@@ -8,12 +8,13 @@ from horse import Horse
 
 def main():
     pygame.init()
-    global screen, clock, current_level_no, current_level, rescued
+    global screen, clock, current_level_no, current_level, rescued, i
     screen = pygame.display.set_mode([768, 399])
     pygame.mouse.set_visible(False)
     clock = pygame.time.Clock()
 
     rescued = False
+    i = 0
 
     title_screen()
 
@@ -37,9 +38,7 @@ def main():
     player.rect.y = 300 - player.rect.height
     active_sprite_list.add(player)
 
-    # horse.rect.x = 60
-    # horse.rect.y = 250
-    # active_sprite_list.add(horse)
+    found_screen = False
 
     done = False
     up = down = left = right = idle = False
@@ -94,6 +93,8 @@ def main():
             horse.rect.y = 263
             active_sprite_list.add(horse)
             rescued = True
+            i = 1
+
 
         ##################
         if player.rect.right >= 500 and current_level.totalShift < current_level.level_limit:
@@ -114,8 +115,8 @@ def main():
             pygame.time.wait(1000)
             if current_level_no == 0:
                 right = False
-                end_of_level_screen(player, levelList)
-            if current_level_no == 1:
+                current_level_no = end_of_level_screen(player, levelList)
+            elif current_level_no == 1:
                 right = False
                 end_of_game_screen(player, levelList)
 
@@ -143,6 +144,12 @@ def main():
         clock.tick(20)
 
         pygame.display.flip()
+
+        if current_level_no == 1 and found_screen == False and i == 1:
+            pygame.time.wait(2500)
+            found_horse_screen()
+            found_screen = True
+            i += 1
 
     pygame.quit()
 
@@ -203,6 +210,7 @@ def end_of_level_screen(player, levelList):
         player.rect.y = 300 - player.rect.height
         pygame.display.update()
         clock.tick(20)
+    return 1
 
 def end_of_game_screen(player, levelList):
     customfont = "C:/Users/Jay/Desktop/Programming Assignments/321/2DFinal - Copy/assets/custom.ttf"
@@ -223,6 +231,24 @@ def end_of_game_screen(player, levelList):
         pygame.display.update()
         clock.tick(20)
     pygame.quit()
+
+def found_horse_screen():
+    customfont = "C:/Users/Jay/Desktop/Programming Assignments/321/2DFinal - Copy/assets/custom.ttf"
+    font = pygame.font.Font(customfont, 36)
+    title_string = "Cowboy Dan has found his horse!\n\nHelp Cowboy " \
+        "Dan get back to present day!\n\nPress Enter to continue"
+    screen_rect = screen.get_rect()
+    title = textrect.render_textrect(title_string, font, screen_rect, (255,255,255), 0)
+
+    done = False
+    while not done:
+        screen.blit(title, (0,0))
+
+        for event in pygame.event.get():
+            if event.type == KEYDOWN and event.key == K_KP_ENTER:
+                done = True
+        pygame.display.update()
+        clock.tick(20)
 
 
 if __name__ == '__main__':
