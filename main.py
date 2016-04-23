@@ -7,7 +7,7 @@ from bullets import Bullet
 
 def main():
     pygame.init()
-    global screen, clock, current_level_no
+    global screen, clock, current_level_no, current_level
     screen = pygame.display.set_mode([768, 399])
     pygame.mouse.set_visible(False)
     clock = pygame.time.Clock()
@@ -20,7 +20,6 @@ def main():
     levelList.append(level.Level1(player))
     levelList.append(level.Level2(player))
 
-    #global current_level_no
     current_level_no = 0
     current_level = levelList[current_level_no]
 
@@ -95,13 +94,10 @@ def main():
         #     current_level.shift(diff)
         ##################
 
-        if player.rect.x >= 600:
-            #play end of level animation
-            player.rect.x = 120
-            current_level = levelList[1]
-            player.level = current_level
-            player.rect.x = 10
-            player.rect.y = 300 - player.rect.height
+        if player.rect.x >= 720:
+            pygame.time.wait(1000)
+            right = False
+            end_of_level_screen(player, levelList)
 
         for bullet in bullet_list:
             dino_hit_list = pygame.sprite.spritecollide(bullet, current_level.enemies, False)
@@ -149,8 +145,8 @@ def level_switch(level, player, current_level, levelList):
 def title_screen():
     customfont = "C:/Users/Jay/Desktop/Programming Assignments/321/2DFinal - Copy/assets/custom.ttf"
     font = pygame.font.Font(customfont, 36)
-    title_string = "Cowboy Dan has got himself into a predicament. His horse wandered into wormhole and got transported back in " \
-        "time to the age of dinosaurs. Of course Cowboy Dan had to follow to save his favorite horse.\n\nHelp Cowboy " \
+    title_string = "Cowboy Dan has got himself into a predicament. His horse wandered into a wormhole and got transported back in " \
+        "time to the age of the dinosaurs. Of course Cowboy Dan had to follow to save his favorite horse.\n\nHelp Cowboy " \
         "Dan find his horse and get back to present day!\n\nPress Enter to continue"
     screen_rect = screen.get_rect()
     title = textrect.render_textrect(title_string, font, screen_rect, (255,255,255), 0)
@@ -164,7 +160,29 @@ def title_screen():
                 done = True
         pygame.display.update()
         clock.tick(20)
-    return
+
+def end_of_level_screen(player, levelList):
+    global current_level
+    customfont = "C:/Users/Jay/Desktop/Programming Assignments/321/2DFinal - Copy/assets/custom.ttf"
+    font = pygame.font.Font(customfont, 36)
+    title_string = "Cowboy Dan found another wormhole! Will this lead him to his horse?"
+    screen_rect = screen.get_rect()
+    title = textrect.render_textrect(title_string, font, screen_rect, (255,255,255), 0)
+
+    done = False
+    while not done:
+        screen.blit(title, (0,0))
+        for event in pygame.event.get():
+            if event.type == KEYDOWN and event.key == K_KP_ENTER:
+                done = True
+
+        player.rect.x = 120
+        current_level = levelList[1]
+        player.level = current_level
+        player.rect.x = 10
+        player.rect.y = 300 - player.rect.height
+        pygame.display.update()
+        clock.tick(20)
 
 
 if __name__ == '__main__':
