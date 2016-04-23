@@ -40,6 +40,9 @@ def main():
 
     found_screen = False
 
+    pygame.mixer.music.load('assets/sounds/lvl1music.mp3')
+    pygame.mixer.music.play(-1)
+
     done = False
     up = down = left = right = idle = False
     while not done:
@@ -67,10 +70,12 @@ def main():
                         bullet.rect.y = player.rect.y + 27
                         all_sprite_list.add(bullet)
                         bullet_list.add(bullet)
-                elif event.key == K_F1:
+                elif event.key == K_1:
                     current_level = level_switch(1, player, current_level, levelList)
-                elif event.key == K_F2:
+                elif event.key == K_2:
                     current_level = level_switch(2, player, current_level, levelList)
+                elif event.key == K_F1:
+                    menu()
 
             elif event.type == KEYUP:
                 if event.key == K_RIGHT:
@@ -95,21 +100,7 @@ def main():
             rescued = True
             i = 1
 
-
-        ##################
-        if player.rect.right >= 500 and current_level.totalShift < current_level.level_limit:
-            diff = player.rect.right - 500
-            diff1 = horse.rect.right - 500
-            player.rect.right = 500
-            horse.rect.right = 455
-            current_level.shift(-diff)
-
-        # this offsets at the beginning
-        # if player.rect.right <= 120:
-        #     diff = 120 - player.rect.left
-        #     player.rect.left = 120
-        #     current_level.shift(diff)
-        ##################
+        player_move(player, horse)
 
         if player.rect.x >= 720:
             pygame.time.wait(1000)
@@ -154,6 +145,19 @@ def main():
     pygame.quit()
 
     # level.Level1()
+
+def player_move(player, horse):
+    if player.rect.right >= 500 and current_level.totalShift < current_level.level_limit:
+            diff = player.rect.right - 500
+            diff1 = horse.rect.right - 500
+            player.rect.right = 500
+            horse.rect.right = 455
+            current_level.shift(-diff)
+
+    # if player.rect.right <= 120:
+    #         diff = 120 - player.rect.left
+    #         player.rect.left = 120
+    #         current_level.shift(diff)
 
 def level_switch(level, player, current_level, levelList):
     if level == 1:
@@ -239,6 +243,24 @@ def found_horse_screen():
         "Dan get back to present day!\n\nPress Enter to continue"
     screen_rect = screen.get_rect()
     title = textrect.render_textrect(title_string, font, screen_rect, (255,255,255), 0)
+
+    done = False
+    while not done:
+        screen.blit(title, (0,0))
+
+        for event in pygame.event.get():
+            if event.type == KEYDOWN and event.key == K_KP_ENTER:
+                done = True
+        pygame.display.update()
+        clock.tick(20)
+
+def menu():
+    customfont = "C:/Users/Jay/Desktop/Programming Assignments/321/2DFinal - Copy/assets/custom.ttf"
+    font = pygame.font.Font(customfont, 36)
+    title_string = "\nMove Cowboy Dan\narrow keys\n\nSwitch Levels\n" \
+        "1 and 2\n\nPress Enter to return to game"
+    screen_rect = screen.get_rect()
+    title = textrect.render_textrect(title_string, font, screen_rect, (255,255,255), 2)
 
     done = False
     while not done:

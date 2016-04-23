@@ -4,7 +4,9 @@ from enemies import Enemy
 from horse import Horse
 
 class Level():
+    pygame.init()
     def __init__(self, player):
+
 
         self.background = None
         self.sky = None
@@ -93,8 +95,6 @@ class Level1(Level):
             enemy_space += 700
             enemy.rect.x = enemy_space
             enemy.rect.y = 307 - enemy.rect.height
-
-
 
 
 class Level2(Level):

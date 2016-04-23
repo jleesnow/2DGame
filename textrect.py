@@ -6,7 +6,7 @@ class TextRectException:
     def __str__(self):
         return self.message
 
-def render_textrect(string, font, rect, text_color, background_color, justification=0):
+def render_textrect(string, font, rect, text_color, background_color, justification=1):
     """Returns a surface containing the passed text string, reformatted
     to fit within the given rect, word-wrapping as necessary. The text
     will be anti-aliased.
