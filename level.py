@@ -42,7 +42,6 @@ class Level():
 
         self.enemies.draw(screen)
 
-        #draw ground
         ground_w = self.ground_tile.get_width()
         ground_h = self.ground_tile.get_height()
 

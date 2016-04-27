@@ -6,9 +6,11 @@ class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
 
+        self.health = 75
         self.jumping = False
         self.yvel = 0
         self.grav = 1
+        self.speed = 10
 
 
         self.idle = ["assets/Cowboy/Cowboy6_idle with gun_0.png",
@@ -51,14 +53,14 @@ class Player(pygame.sprite.Sprite):
             colorkey = self.image.get_at((0, 0))
             self.image.set_colorkey(colorkey)
             if self.frame == 3: self.frame = 0
-            self.rect.left -= 10
+            self.rect.left -= self.speed
             self.direction = "L"
 
         if right:
             self.frame += 1
             self.image = pygame.image.load(self.right_walk[self.frame])
             if self.frame == 3: self.frame = 0
-            self.rect.right += 10
+            self.rect.right += self.speed
             self.direction = "R"
 
         if idle:
