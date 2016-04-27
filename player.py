@@ -5,10 +5,8 @@ from pygame import *
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        #super().__init__()
 
         self.jumping = False
-
         self.yvel = 0
         self.grav = 1
 
@@ -38,10 +36,7 @@ class Player(pygame.sprite.Sprite):
 
 
         self.direction = "R"
-
-        self.level = None ####
         self.frame = 0
-
         self.image = pygame.image.load('assets/Cowboy/Cowboy6_idle with gun_0.png').convert()
 
         colorkey = self.image.get_at((0, 0))

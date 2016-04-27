@@ -1,19 +1,15 @@
 import pygame
 from pygame import *
 from enemies import Enemy
-from horse import Horse
 
 class Level():
     pygame.init()
     def __init__(self, player):
 
-
         self.background = None
         self.sky = None
         self.ground_tile = pygame.image.load("assets/Resources/plainDirt2.png").convert()
-
         self.enemies = pygame.sprite.Group()
-
         self.shifted = 0
         self.totalShift = 0
         self.player = player
@@ -23,29 +19,30 @@ class Level():
         self.enemies.update()
 
     def draw(self, screen, current_level_no):
-        self.background_size = self.background.get_size()
-        self.background_rect = self.background.get_rect()
-        w,h = self.background_size
+        self.background_size = self.background.get_size()#
+        self.background_rect = self.background.get_rect()#
+        w,h = self.background_size#
         colorkey = self.background.get_at((0, 0))
         self.background.set_colorkey(colorkey)
         self.portal = pygame.image.load("assets/portal.png").convert()
         colorkey = self.portal.get_at((0, 0))
         self.portal.set_colorkey(colorkey)
-        i = 700
+        portal_shift = 700
 
 
 
         screen.blit(self.sky, (0,0))
-        screen.blit(self.background, (self.shifted // 3,0))
+        screen.blit(self.background, (self.shifted // 3, 0))
 
         screen.blit(self.portal, (self.shifted // 3, 160))
         if self.totalShift >= 4500:
-            i-=5
-            screen.blit(self.portal, (i, 160))
+            portal_shift-=5
+            screen.blit(self.portal, (portal_shift, 160))
 
 
         self.enemies.draw(screen)
 
+        #draw ground
         ground_w = self.ground_tile.get_width()
         ground_h = self.ground_tile.get_height()
 
@@ -97,6 +94,7 @@ class Level1(Level):
             enemy.rect.y = 307 - enemy.rect.height
 
 
+
 class Level2(Level):
     def __init__(self, player):
         Level.__init__(self, player)
@@ -125,3 +123,4 @@ class Level2(Level):
             enemy_space += 700
             enemy.rect.x = enemy_space
             enemy.rect.y = 307 - enemy.rect.height
+

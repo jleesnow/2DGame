@@ -1,9 +1,7 @@
 import pygame
 
-
 class Enemy(pygame.sprite.Sprite):
     def __init__(self):
-        #super().__init__()
         pygame.sprite.Sprite.__init__(self)
 
         self.health = 100
