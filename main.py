@@ -78,6 +78,8 @@ def main():
                     non_enemy_sprites.add(horse)
                 elif event.key == K_F1:
                     menu()
+                elif event.key == K_ESCAPE:
+                    pygame.quit()
 
             elif event.type == KEYUP:
                 if event.key == K_RIGHT:
