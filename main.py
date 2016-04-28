@@ -14,6 +14,7 @@ def main():
     global screen, clock, current_level_num, current_level, rescuedHorse, horse_found_delay, customfont, health
     customfont = os.path.join('assets', 'custom.ttf')
     screen = pygame.display.set_mode([768, 399])
+    pygame.display.set_caption('Cowboys and Dinosaurs')
     pygame.mouse.set_visible(False)
     clock = pygame.time.Clock()
 
@@ -211,7 +212,7 @@ def title_screen():
 def end_of_level_screen(player, levelList):
     global current_level
     font = pygame.font.Font(customfont, 36)
-    title_string = "\n\nCowboy Dan has found another wormhole! What are the odds? Will this lead him to his horse?\n\n" \
+    title_string = "\nCowboy Dan has found another wormhole! What are the odds? Will this lead him to his horse?\n\n" \
                    "Press ENTER to continue"
     screen_rect = screen.get_rect()
     title = textrect.render_textrect(title_string, font, screen_rect, (255,255,255), 0)
@@ -233,7 +234,7 @@ def end_of_level_screen(player, levelList):
 
 def end_of_game_screen(player, levelList):
     font = pygame.font.Font(customfont, 36)
-    title_string = "Cowboy Dan has saved his horse and made it back to present day! Good job! \n\nThank you for playing! \n\nPress Esc to exit\nENTER to play again"
+    title_string = "\nCowboy Dan has saved his horse and made it back to present day! Good job! \n\nThank you for playing! \n\nPress Esc to exit\nENTER to play again"
     screen_rect = screen.get_rect()
     title = textrect.render_textrect(title_string, font, screen_rect, (255,255,255), 0)
 
@@ -255,7 +256,7 @@ def end_of_game_screen(player, levelList):
 
 def found_horse_screen():
     font = pygame.font.Font(customfont, 36)
-    title_string = "Cowboy Dan has found his horse!\n\nHelp Cowboy " \
+    title_string = "\nCowboy Dan has found his horse!\n\nHelp Cowboy " \
         "Dan get back to present day!\n\nPress ENTER to continue"
     screen_rect = screen.get_rect()
     title = textrect.render_textrect(title_string, font, screen_rect, (255,255,255), 0)
@@ -294,7 +295,7 @@ def draw_horse(horse):
 def game_over():
     pygame.time.wait(1000)
     font = pygame.font.Font(customfont, 36)
-    title_string = "\n\nGAME OVER\n\nPress ENTER to try again\nEsc to exit"
+    title_string = "\n\nYou killed Cowboy Dan!\n\nPress ENTER to try again\nEsc to exit"
     screen_rect = screen.get_rect()
     title = textrect.render_textrect(title_string, font, screen_rect, (255,255,255), 2)
 
