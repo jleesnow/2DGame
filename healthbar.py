@@ -16,13 +16,6 @@ class Health(pygame.sprite.Sprite):
         screen.blit(self.image, (10,10))
 
     def health_update(self, screen):
-        if self.reset == True:
-            self.num_hearts = 3
-            self.image = pygame.image.load('assets/hearts/3hearts.bmp').convert()
-            colorkey = self.image.get_at((0, 0))
-            self.image.set_colorkey(colorkey)
-            self.rect = self.image.get_rect()
-
         if self.num_hearts == 3:
             self.image = pygame.image.load('assets/hearts/3hearts.bmp').convert()
             colorkey = self.image.get_at((0, 0))

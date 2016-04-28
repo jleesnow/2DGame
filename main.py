@@ -176,7 +176,7 @@ def level_switch(level, player, current_level, levelList):
         player.rect.x = 60
         player.rect.y = 300 - player.rect.height
         current_level.shift(-current_level.shifted)
-        health.reset = True
+        health.num_hearts = 3
         player.health = 75
         current_level_num = 0
         return levelList[0]
@@ -184,7 +184,7 @@ def level_switch(level, player, current_level, levelList):
         player.rect.x = 60
         player.rect.y = 300 - player.rect.height
         current_level.shift(-current_level.shifted)
-        health.reset = True
+        health.num_hearts = 3
         player.health = 75
         current_level_num = 1
         return levelList[1]
@@ -194,7 +194,7 @@ def title_screen():
     font = pygame.font.Font(customfont, 36)
     title_string = "Cowboy Dan has got himself into a predicament. His horse wandered into a wormhole and got transported back in " \
         "time to the age of the dinosaurs. Of course Cowboy Dan had to follow to save his favorite horse.\n\nHelp Cowboy " \
-        "Dan find his horse and get back to present day!\n\nPress Space to continue"
+        "Dan find his horse and get back to present day!\n\nPress ENTER to continue"
     screen_rect = screen.get_rect()
     title = textrect.render_textrect(title_string, font, screen_rect, (255,255,255), 0)
 
@@ -203,7 +203,7 @@ def title_screen():
         screen.blit(title, (0,0))
 
         for event in pygame.event.get():
-            if event.type == KEYDOWN and event.key == K_SPACE:
+            if event.type == KEYDOWN and event.key == K_RETURN:
                 done = True
         pygame.display.update()
         clock.tick(20)
@@ -212,7 +212,7 @@ def end_of_level_screen(player, levelList):
     global current_level
     font = pygame.font.Font(customfont, 36)
     title_string = "\n\nCowboy Dan has found another wormhole! What are the odds? Will this lead him to his horse?\n\n" \
-                   "Press SPACE to continue"
+                   "Press ENTER to continue"
     screen_rect = screen.get_rect()
     title = textrect.render_textrect(title_string, font, screen_rect, (255,255,255), 0)
 
@@ -220,7 +220,7 @@ def end_of_level_screen(player, levelList):
     while not done:
         screen.blit(title, (0,0))
         for event in pygame.event.get():
-            if event.type == KEYDOWN and event.key == K_SPACE:
+            if event.type == KEYDOWN and event.key == K_RETURN:
                 done = True
 
         player.rect.x = 120
@@ -233,7 +233,7 @@ def end_of_level_screen(player, levelList):
 
 def end_of_game_screen(player, levelList):
     font = pygame.font.Font(customfont, 36)
-    title_string = "Cowboy Dan has saved his horse and made it back to present day! Good job! \n\nThank you for playing! \n\nPress Esc to exit\nSpace to play again"
+    title_string = "Cowboy Dan has saved his horse and made it back to present day! Good job! \n\nThank you for playing! \n\nPress Esc to exit\nENTER to play again"
     screen_rect = screen.get_rect()
     title = textrect.render_textrect(title_string, font, screen_rect, (255,255,255), 0)
 
@@ -246,7 +246,7 @@ def end_of_game_screen(player, levelList):
                 done = True
             elif event.type == KEYDOWN and event.key == K_ESCAPE:
                 done = True
-            elif event.type == KEYDOWN and event.key == K_SPACE:
+            elif event.type == KEYDOWN and event.key == K_RETURN:
                 main()
                 done = True
         pygame.display.update()
@@ -256,7 +256,7 @@ def end_of_game_screen(player, levelList):
 def found_horse_screen():
     font = pygame.font.Font(customfont, 36)
     title_string = "Cowboy Dan has found his horse!\n\nHelp Cowboy " \
-        "Dan get back to present day!\n\nPress SPACE to continue"
+        "Dan get back to present day!\n\nPress ENTER to continue"
     screen_rect = screen.get_rect()
     title = textrect.render_textrect(title_string, font, screen_rect, (255,255,255), 0)
 
@@ -265,7 +265,7 @@ def found_horse_screen():
         screen.blit(title, (0,0))
 
         for event in pygame.event.get():
-            if event.type == KEYDOWN and event.key == K_SPACE:
+            if event.type == KEYDOWN and event.key == K_RETURN:
                 done = True
         pygame.display.update()
         clock.tick(20)
@@ -273,7 +273,7 @@ def found_horse_screen():
 def menu():
     font = pygame.font.Font(customfont, 36)
     title_string = "\nMove Cowboy Dan: arrow keys\n\nSwitch Levels: " \
-    "1 and 2\n\nSuper Speed & Invincibility: P\n\nPress SPACE to return to game"
+    "1 and 2\n\nSuper Speed & Invincibility: P\n\nPress ENTER to return to game"
     screen_rect = screen.get_rect()
     title = textrect.render_textrect(title_string, font, screen_rect, (255,255,255), 2)
 
@@ -282,7 +282,7 @@ def menu():
         screen.blit(title, (0,0))
 
         for event in pygame.event.get():
-            if event.type == KEYDOWN and event.key == K_SPACE:
+            if event.type == KEYDOWN and event.key == K_RETURN:
                 done = True
         pygame.display.update()
         clock.tick(20)
@@ -294,7 +294,7 @@ def draw_horse(horse):
 def game_over():
     pygame.time.wait(1000)
     font = pygame.font.Font(customfont, 36)
-    title_string = "\n\nGAME OVER\n\nPress Space to try again\nEsc to exit"
+    title_string = "\n\nGAME OVER\n\nPress ENTER to try again\nEsc to exit"
     screen_rect = screen.get_rect()
     title = textrect.render_textrect(title_string, font, screen_rect, (255,255,255), 2)
 
@@ -303,7 +303,7 @@ def game_over():
         screen.blit(title, (0,0))
 
         for event in pygame.event.get():
-            if event.type == KEYDOWN and event.key == K_SPACE:
+            if event.type == KEYDOWN and event.key == K_RETURN:
                 main()
                 done = True
             if event.type == KEYDOWN and event.key == K_ESCAPE:

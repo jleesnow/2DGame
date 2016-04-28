@@ -6,7 +6,7 @@ class Bullet(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         gunshot = pygame.mixer.Sound('assets/sounds/gun.wav')
-        gunshot.set_volume(.5)
+        gunshot.set_volume(.3)
         gunshot.play()
 
         self.direction = direction
