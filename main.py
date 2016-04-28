@@ -289,7 +289,7 @@ def menu():
 
 def draw_horse(horse):
     horse.rect.x = 150
-    horse.rect.y = 263
+    horse.rect.y = 268
 
 def game_over():
     pygame.time.wait(1000)
